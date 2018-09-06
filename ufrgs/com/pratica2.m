@@ -16,7 +16,7 @@ L = length(t); %comprimento do vetor tempo
 NFFT = 2^nextpow2(L); %número de pontos a serem utilizados na FFT
 f = Fs/2*linspace(-1,1,NFFT); %vetor frequência (para sinais no domínio frequência)
 
-% Pegar bits dois a dois
+%--- TRANSMISSOR ---%
 bits = randi([0 1], [1, 8]); 
 bits2 = reshape(bits,2,4);
 for curBits = bits2(:,1:size(bits2,2))
@@ -31,7 +31,7 @@ for curBits = bits2(:,1:size(bits2,2))
 
     elseif curBits == [1;1]
         curI = -sqrt(2)/2;
-        curQ = -sqrt(2)/2;
+        curQ = -sqrt(2)/2;  
 
     elseif curBits == [1;0]
         curI = sqrt(2)/2;
@@ -42,19 +42,41 @@ for curBits = bits2(:,1:size(bits2,2))
     Q = [Q, curQ];
 end
 
-% Reshape bits, I and Q
 bits = reshape(repmat(bits, [length(t)/length(bits), 1]), [1, length(t)]);
 I = reshape(repmat(I, [length(t)/length(I), 1]), [1, length(t)]);
 Q = reshape(repmat(Q, [length(t)/length(Q), 1]), [1, length(t)]);
-% Plot bits, I and Q
-figure, plot(t, bits), ylim([0, 1.5]), title('Input');
-figure, plot(t, I), ylim([-3, 3]), title('I');
-figure, plot(t, Q), ylim([-3, 3]), title('Q');
-% Create modulated wave
+% Plotando dados do receptor
+figure;
+subplot(3,1,1), plot(t, bits), ylim([0, 1.5]), title('Bits de entrada');
+subplot(3,1,2), plot(t, I), ylim([-3, 3]), title('Componente I no transmissor');
+subplot(3,1,3), plot(t, Q), ylim([-3, 3]), title('Componente Q no transmissor');
+% Gerando a onda modulada
 modulated = I.*cos(2*pi*Fc*t) - Q.*sin(2*pi*Fc*t);
-figure, plot(t, modulated);
+figure, plot(t, modulated), xlim([0, 4]), title('Sinal modulado resultante');
 
-% Demodulate received signal
+%--- RECEPTOR ---%
+% Demodulação do sinal
+iComponent = modulated.*cos(2*pi*Fc*t);
+qComponent = modulated.*(-sin(2*pi* Fc*t));
+
+subplot(4,1,1), plot(t, iComponent), title('Componente I no receptor antes da filtragem');
+subplot(4,1,2), plot(t, qComponent), title('Componente Q no receptor antes da filtragem');
+iComponent_trans = fftshift(fft(iComponent, NFFT));
+qComponent_trans = fftshift(fft(qComponent, NFFT));
+
+% Fs/NFFT -> step
+% Fc/(Fs/NFFT) -> número de células correspondente ao intervalo Fc
+% Filtros
+iComponent_trans(1:length(iComponent_trans)/2-Fc/(Fs/NFFT)) = 0;    
+iComponent_trans(length(iComponent_trans)/2+Fc/(Fs/NFFT):length(f)) = 0;
+qComponent_trans(1:length(qComponent_trans)/2-Fc/(Fs/NFFT)) = 0;    
+qComponent_trans(length(qComponent_trans)/2+Fc/(Fs/NFFT):length(f)) = 0;
+% Obtendo I e Q após a filtragem
+iComponent = ifft(ifftshift(iComponent_trans), length(t));
+qComponent = ifft(ifftshift(qComponent_trans), length(t));
+subplot(4,1,3), plot(t, iComponent), title('Componente I no receptor depois da filtragem');
+subplot(4,1,4), plot(t, qComponent), title('Componente Q no receptor depois da filtragem');
+
 
 
 
