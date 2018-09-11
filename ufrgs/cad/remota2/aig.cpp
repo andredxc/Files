@@ -3,16 +3,17 @@
 
 #include "aig.h"
 
-#include <string.h>
-
-
 //------------------AigNode------------------
-string AigNode::getName(){
-    return this->name;
+AigNode::AigNode(){
+    setDepth(-1);
 }
 
-void AigNode::setName(string name){
-    this->name = name;
+int AigNode::getDepth(){
+    return this->depth;
+}
+
+void AigNode::setDepth(int value){
+    depth = value;
 }
 
 //------------------AndNode------------------
@@ -72,6 +73,14 @@ void AndNode::setFanIn(int index, AigNode * node, bool isInverted){
 //------------------InputNode------------------
 InputNode::InputNode(){}
 
+void InputNode::setName(string newName){
+    this->name = newName;
+}
+
+string InputNode::getName(){
+    return this->name;
+}
+
 AigNodeType InputNode::getType(){
     return INPUT_NODE;
 }
@@ -108,6 +117,14 @@ void InputNode::setFanIn(int, AigNode *, bool){
 //------------------OutputNode------------------
 
 OutputNode::OutputNode(){}
+
+void OutputNode::setName(string newName){
+    this->name = newName;
+}
+
+string OutputNode::getName(){
+    return this->name;
+}
 
 AigNodeType OutputNode::getType(){
     return OUTPUT_NODE;
@@ -157,23 +174,21 @@ void OutputNode::setFanIn(int index, AigNode * node, bool isInverted){
 
 //------------------AIG------------------
 
-Aig::Aig(){
-
-}
+Aig::Aig(){}
 
 string Aig::getName(){
     return this->name;
 }
 
-vector<AigNode*> Aig::getInputs(){
+list<AigNode*> Aig::getInputs(){
     return this->inputs;
 }
 
-vector<AigNode*> Aig::getOutputs(){
+list<AigNode*> Aig::getOutputs(){
     return this->outputs;
 }
 
-vector<AigNode*> Aig::getNodes(){
+list<AigNode*> Aig::getNodes(){
     return this->nodes;
 }
 
@@ -193,44 +208,38 @@ void Aig::setName(string newName){
     this->name = newName;
 }
 
-int Aig::findInput(string name){
+int Aig::computeDepth(AigNode* node){
 
-    int i;
+    int depth0 = -1;
+    int depth1 = -1;
 
-    for(i = 0; i < inputs.size(); i++){
-        if(strcmp(inputs.at(i)->getName().c_str(), name.c_str()) == 0){
-            // Found input
-            return i;
-        }
+    if(!node){
+        return 0;
     }
 
-    return -1;
-}
-
-int Aig::findOutput(string name){
-
-    int i;
-
-    for(i = 0; i < outputs.size(); i++){
-        if(strcmp(outputs.at(i)->getName().c_str(), name.c_str()) == 0){
-            // Found output
-            return i;
-        }
+    if(node->getType() == INPUT_NODE){
+        // Primary node, depth=0
+        node->setDepth(0);
+        return 0;
     }
+    else{
+        if(node->getFanIn(0) != NULL && node->getFanIn(0)->getDepth() > -1){
+            depth0 = node->getFanIn(0)->getDepth();
+        }
+        else{
+            depth0 = Aig::computeDepth(node->getFanIn(0));
+        }
 
-    return -1;
-}
-
-int Aig::findAnd(string name){
-
-        int i;
-
-        for(i = 0; i < nodes.size(); i++){
-            if(strcmp(nodes.at(i)->getName().c_str(), name.c_str()) == 0){
-                // Found output
-                return i;
+        if(node->getType() == AND_NODE){
+            // Only ANDs have the second input
+            if(node->getFanIn(1) != NULL && node->getFanIn(1)->getDepth() > -1){
+                depth1 = node->getFanIn(1)->getDepth();
+            }
+            else{
+                depth1 = Aig::computeDepth(node->getFanIn(1));
             }
         }
 
-        return -1;
+        return (depth0 >= depth1) ? depth0+1 : depth1+1;
+    }
 }

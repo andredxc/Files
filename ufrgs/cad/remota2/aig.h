@@ -17,12 +17,10 @@ typedef enum {
 
 class AigNode {
 private:
-    int ID;
-    string name;
+    int ID, depth;
 
 public:
-    void setName(string);
-    string getName();
+    AigNode();
     virtual AigNodeType getType() = 0;
     virtual void connectTo(AigNode*, int, int) = 0;
     virtual AigNode* getFanIn(int) = 0;
@@ -30,6 +28,8 @@ public:
     virtual vector<AigNode*> getFanOut() = 0;
     virtual vector<bool> getInvertedFanOut() = 0;
     virtual void setFanIn(int, AigNode*, bool) = 0;
+    int getDepth();
+    void setDepth(int value);
 };
 
 class AndNode:public AigNode {
@@ -57,11 +57,14 @@ public:
 
 class InputNode:public AigNode {
 private:
+    string name;
     vector<AigNode*> fanOut;
     vector<bool> invertedFanout;
 
 public:
     InputNode();
+    void setName(string);
+    string getName();
     AigNodeType getType();
     void connectTo(AigNode*, int, int);
     AigNode* getFanIn(int);
@@ -75,9 +78,12 @@ public:
 class OutputNode:public AigNode {
     AigNode* in0;
     bool in0Inverted;
+    string name;
 
 public:
     OutputNode();
+    void setName(string);
+    string getName();
     AigNodeType getType();
     void connectTo(AigNode*, int, int);
     AigNode* getFanIn(int);
@@ -93,21 +99,19 @@ public:
 class Aig {
 private:
     string name;
-    vector<AigNode*> nodes; //deve conter todos os nodos (and, entradas e saídas)
-    vector<AigNode*> inputs; //deve conter todas as entradas
-    vector<AigNode*> outputs; //deve conter todas as saidas
+    list<AigNode*> nodes; //deve conter todos os nodos (and, entradas e saídas)
+    list<AigNode*> inputs; //deve conter todas as entradas
+    list<AigNode*> outputs; //deve conter todas as saidas
 
 public:
     Aig();
     string getName();
-    vector<AigNode*> getInputs();
-    vector<AigNode*> getOutputs();
-    vector<AigNode*> getNodes();
+    list<AigNode*> getInputs();
+    list<AigNode*> getOutputs();
+    list<AigNode*> getNodes();
     void insertNode(AigNode*);
     void insertInputNode(AigNode*);
     void insertOutputNode(AigNode*);
     void setName(string);
-    int findInput(string name);
-    int findOutput(string name);
-    int findAnd(string name);
+    static int computeDepth(AigNode* node);
 };

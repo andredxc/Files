@@ -6,10 +6,9 @@ using namespace std;
 
 int main()
 {
-    AAGReader reader("C17.aag");
-    Aig* aig = reader.readFile();
+    /*AAGReader reader("C17.aag");
+    Aig* aig = reader.readFile();*/
 
-    /*
     Aig* aig = new Aig();
     aig->setName("C17");
 
@@ -77,6 +76,7 @@ int main()
     cout << "  * number of Outputs: " << aig->getOutputs().size() << "\n";
     cout << "  * number of Ands: " << aig->getNodes().size()-aig->getInputs().size()-aig->getOutputs().size() << "\n";
 
-    */
+    fprintf(stderr, "AIG depth: %d\n", Aig::computeDepth(out1));
+
     return EXIT_SUCCESS;
 }
