@@ -4,8 +4,8 @@
 #include <fcntl.h>
 #include "libgalileo2.h"
 
-// #define PWM_LED_DUTYCYCLE "/sys/class/pwm/pwmchip0/pwm1/duty_cycle"
-#define PWM_LED_DUTYCYCLE "/dev/stdout"
+#define PWM_LED_DUTYCYCLE "/sys/class/pwm/pwmchip0/pwm1/duty_cycle"
+// #define PWM_LED_DUTYCYCLE "/dev/stdout"
 #define PWM_LED_ENABLE "/sys/class/pwm/pwmchip0/pwm1/enable"
 #define PWM_PERIOD "/sys/class/pwm/pwmchip0/device/pwm_period"
 

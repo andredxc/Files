@@ -1,0 +1,22 @@
+Lab 1:
+
+    passwd
+    ou
+    passwd <login>
+
+    useradd -c "Nome por extenso" -s /bin/bash -m <login>
+
+    userdel -r <login>
+
+Lab 3:
+
+    groupadd -r <groupName>
+
+    groupmems -g <groupName> -a <login>
+
+    cp <scriptPath> /etc/init.d
+    chmod +x /etc/init.d/<scriptName>
+    update-rc.d <scriptName> defaults
+    reboot
+
+    update-rc.d <scriptName> disable
