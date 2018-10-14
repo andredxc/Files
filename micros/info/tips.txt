@@ -19,4 +19,4 @@ Lab 3:
     update-rc.d <scriptName> defaults
     reboot
 
-    update-rc.d <scriptName> disable
+    update-rc.d <scriptName> 
