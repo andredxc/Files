@@ -2,9 +2,9 @@ TARGET=pwmServo
 SRCS=$(TARGET).c
 
 FLAGS=-O2 -Wall -g -MMD
-INCLUDE=-I../lib
+INCLUDE=-I../../lib
 LIBDIR=
-LIBS=../lib/libgalileo2.a
+LIBS=../../lib/libgalileo2.a
 
 CC=$(CROSS_COMPILE)gcc
 CFLAGS=$(FLAGS) $(INCLUDE)
