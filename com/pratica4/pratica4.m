@@ -13,12 +13,10 @@ NFFT = 2^nextpow2(length(t));
 f = sampFreq/2*linspace(-1,1,NFFT);
 
 % TRANSMISSOR ---------------------------------------------------------------
-seqCodes = walsh_code(nUsers);
-seqLength = size(seqCodes, 2);
 bits = 2*randi(2, [nUsers,nBits])-3;
-
-% seqCodes = [1 1 1 1; 1 -1 1 -1; 1 1 -1 -1; 1 -1 -1 1];
-% bits = [-1 1 -1 1 1 -1 1 -1; -1 1 1 1 -1 1 -1 -1; -1 -1 -1 -1 -1 -1 1 -1; 1 1 1 1 -1 -1 1 1];
+% Matriz de Walsh gerada pelo algoritmo visto em aula
+seqCodes = [1 1 1 1; 1 -1 1 -1; 1 1 -1 -1; 1 -1 -1 1];
+seqLength = size(seqCodes, 2);
 
 % Aplicando a sequencia de cada usuario nos respectivos dados
 spreadBits = zeros(nUsers, nBits*seqLength);
@@ -85,7 +83,6 @@ plotData = reshape(repmat(received(3,:), [length(t)/nBits, 1]), [1, length(t)]);
 subplot(1,4,3), plot(t, plotData), ylim([-1.1, 1.1]), title('Bits de entrada 3 no receptor');
 plotData = reshape(repmat(received(4,:), [length(t)/nBits, 1]), [1, length(t)]);
 subplot(1,4,4), plot(t, plotData), ylim([-1.1, 1.1]), title('Bits de entrada 4 no receptor');
-
 
 
 
