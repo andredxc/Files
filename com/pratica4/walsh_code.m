@@ -8,12 +8,10 @@ end
 
 num_iter = ceil(log2(size));
 
-mat = logical([0 0 ; 0 1]);
+mat = [1 1 ; 1 -1];
 
 for i = 2:num_iter
-    mat = [mat mat; mat ~mat];
+    mat = [mat, mat; mat, -mat];
 end
-
-mat = uint8(mat);
 end
 
