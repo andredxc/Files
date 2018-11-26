@@ -1,4 +1,4 @@
-TARGET=readOneShot
+TARGET=readOneShot2
 SRCS=$(TARGET).c
 
 FLAGS=-O2 -Wall -g -MMD

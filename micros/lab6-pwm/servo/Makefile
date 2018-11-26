@@ -1,4 +1,4 @@
-TARGET=pwmServo
+TARGET=pwmServo2
 SRCS=$(TARGET).c
 
 FLAGS=-O2 -Wall -g -MMD

@@ -11,6 +11,7 @@ show_help () {
             -r: Remove script
             -n: Galileo network name (default is 'galileo')
             -t: Show Galileo dirs containing scripts
+            -f: Script path
             "
 }
 

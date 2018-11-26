@@ -1,14 +1,14 @@
 TARGET=libgalileo2.a
-SRCS=pputs.c pgets.c
+SRCS=libgalileo2.c
 
-FLAGS=-O2 -Wall -MMD
+FLAGS=-O2 -Wall -MMD -g
 INCLUDE=-I.
 LIBDIR=
 LIBS=
 
 CC=$(CROSS_COMPILE)gcc
 CCAR=$(CROSS_COMPILE)ar
-CFLAGS=$(FLAG) $(INCLUDE)
+CFLAGS=$(FLAGS) $(INCLUDE)
 LDFLAGS=$(LIBDIR) $(LIBS)
 CCARFLAGS=-crvs
 

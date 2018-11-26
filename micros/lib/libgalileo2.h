@@ -8,6 +8,8 @@ extern "C"
 
     extern int pputs(const char *path, const char *string);
     extern char* pgets(char* string, int size, const char* path);
+    extern double readAdcVoltage(int adcNum);
+    extern int setServoAngle(int pwmNum, int degAngle);
 
 #ifdef __cplusplus
 };
