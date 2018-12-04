@@ -93,9 +93,9 @@ int main(){
         fprintf(stderr, "Angle: %.2f rad -- Stored angle: %.2f\n", radAngle, storedRadAngle);
 
         // Write servo position to LCD
-        snprintf(buffer, sizeof(buffer), "%d degrees                        ", degAngle);
+        snprintf(buffer, sizeof(buffer), "%d degrees  ", degAngle);
         writeLCD(fd_lcd, 1, buffer, strlen(buffer));
-        snprintf(buffer, sizeof(buffer), "%.2f radians                       ", radAngle);
+        snprintf(buffer, sizeof(buffer), "%.2f radians  ", radAngle);
         writeLCD(fd_lcd, 2, buffer, strlen(buffer));
 
         // Check for button activation

@@ -2,7 +2,7 @@ TARGET=p21
 SRCS=$(TARGET).c
 
 # Using hardware trigger
-FLAGS=-Wall -g -MMD
+FLAGS=-Wall -g -MMD -lm
 
 # Using software trigger
 #FLAGS=-Wall -g -MMD -DTRIG_SYSFS
@@ -13,7 +13,7 @@ LIBS=-lgalileo2
 
 CC=$(CROSS_COMPILE)gcc
 CFLAGS=$(FLAGS) $(INCLUDE)
-LDFLAGS=$(LIBDIR) $(LIBS)
+LDFLAGS=$(LIBDIR) $(LIBS) -lm
 
 all: $(TARGET)
 

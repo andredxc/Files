@@ -94,6 +94,32 @@ case "$1" in
             echo -n "64" > /sys/class/gpio/export
         fi
         echo -n "1" > /sys/class/gpio/gpio64/value
+
+        # I2C 0  on IO18 -------------------------------------------------------
+        # Resistor: gpio57 = pull-up
+        if [ ! -d /sys/class/gpio/gpio57 ] ; then
+            echo -n "57" > /sys/class/gpio/export
+        fi
+        echo -n "out" > /sys/class/gpio/gpio57/direction
+        echo -n "1" > /sys/class/gpio/gpio57/value
+
+        # Pin Mux 1: gpio60 = low
+        if [ ! -d /sys/class/gpio/gpio60 ] ; then
+            echo -n "60" > /sys/class/gpio/export
+        fi
+        echo -n "out" > /sys/class/gpio/gpio60/direction
+        echo -n "0" > /sys/class/gpio/gpio60/value
+
+        # I2C 0  on IO19 -------------------------------------------------------
+        # Resistor: gpio59 = pull-up
+        if [ ! -d /sys/class/gpio/gpio59 ] ; then
+            echo -n "59" > /sys/class/gpio/export
+        fi
+        echo -n "out" > /sys/class/gpio/gpio59/direction
+        echo -n "1" > /sys/class/gpio/gpio59/value
+
+        chgrp i2c /dev/i2c-0
+        chmod g+rw /dev/i2c-0
     	;;
     stop)
         # ADC 0
@@ -109,6 +135,12 @@ case "$1" in
         echo -n "17" > /sys/class/gpio/unexport
         echo -n "76" > /sys/class/gpio/unexport
         echo -n "64" > /sys/class/gpio/unexport
+        # I2C
+        echo -n "in" > /sys/class/gpio/gpio59/direction
+        echo -n "59" > /sys/class/gpio/unexport
+        echo -n "in" > /sys/class/gpio/gpio57/direction
+        echo -n "57" > /sys/class/gpio/unexport
+        echo -n "60" > /sys/class/gpio/unexport
         ;;
     status)
         cat /sys/bus/iio/devices/iio:device0/trigger/current_trigger
