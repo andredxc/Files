@@ -19,4 +19,8 @@ Lab 3:
     update-rc.d <scriptName> defaults
     reboot
 
-    update-rc.d <scriptName> 
+    update-rc.d <scriptName>
+
+
+    Não mudar os espaços
+    if [ ! -d /sys/class/pwm/pwmchip0/pwm1 ] ; then

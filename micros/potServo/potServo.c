@@ -44,6 +44,12 @@ int main(){
         if(newAngle >= angle+ANGLE_DEADZONE || newAngle <= angle-ANGLE_DEADZONE){
             // Applies deadzone to angle variation
             angle = newAngle;
+            if(angle > 90){
+                angle = 0;
+            }
+            else if(angle < -90){
+                angle = -90;
+            }
             if(setServoAngle(1, angle) < 1){
                 flag_done = 1;
             }

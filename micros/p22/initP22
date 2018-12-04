@@ -1,0 +1,150 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          initP22
+# Required-Start:
+# Should-Start:
+# Required-Stop:
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Configures GPIO for Lab 7.
+# Description:       Configures GPIO for Lab 7.
+### END INIT INFO
+
+case "$1" in
+    start|restart|force-reload)
+
+        # ADC_A0 as one-shot ADC in ------------------------------------------
+        # Linux: in_voltage0_raw
+        chgrp adc /sys/bus/iio/devices/iio:device0/in_voltage0_raw
+        chmod g+r /sys/bus/iio/devices/iio:device0/in_voltage0_raw
+        chgrp adc /sys/bus/iio/devices/iio:device0/in_voltage0_scale
+        chmod g+r /sys/bus/iio/devices/iio:device0/in_voltage0_scale
+
+        # Resistor: gpio49 disabled
+        if [ ! -d /sys/class/gpio/gpio49 ] ; then
+            echo -n "49" > /sys/class/gpio/export
+        fi
+        echo -n "in" > /sys/class/gpio/gpio49/direction
+
+        # IO02 as gpio input
+        # Linux: gpio13
+        if [ ! -d /sys/class/gpio/gpio13 ] ; then
+            echo -n "13" > /sys/class/gpio/export
+        fi
+        echo -n "in" > /sys/class/gpio/gpio13/direction
+
+        # Level Shifter: gpio34 = in = 1
+        if [ ! -d /sys/class/gpio/gpio34 ] ; then
+            echo -n "34" > /sys/class/gpio/export
+        fi
+        echo -n "1" > /sys/class/gpio/gpio34/value
+        echo -n "in" > /sys/class/gpio/gpio34/direction
+
+        # Resistor: gpio35 = pull-down = 0 = out
+        if [ ! -d /sys/class/gpio/gpio35 ] ; then
+            echo -n "35" > /sys/class/gpio/export
+        fi
+        echo -n "0" > /sys/class/gpio/gpio35/value
+        echo -n "out" > /sys/class/gpio/gpio35/direction
+
+        # Pin Mux 1: gpio77 = low
+        if [ ! -d /sys/class/gpio/gpio77 ] ; then
+            echo -n "77" > /sys/class/gpio/export
+        fi
+        echo -n "0" > /sys/class/gpio/gpio77/value
+
+        # PWM1 -----------------------------------------------------------------
+        # Linux: pwm1
+        if [ ! -d /sys/class/pwm/pwmchip0/pwm1 ] ; then
+            echo -n "1" > /sys/class/pwm/pwmchip0/export
+        fi
+        chgrp pwm /sys/class/pwm/pwmchip0/device/pwm_period
+        chgrp pwm /sys/class/pwm/pwmchip0/pwm1/enable
+        chgrp pwm /sys/class/pwm/pwmchip0/pwm1/duty_cycle
+        chmod g+rw /sys/class/pwm/pwmchip0/device/pwm_period
+        chmod g+rw /sys/class/pwm/pwmchip0/pwm1/enable
+        chmod g+rw /sys/class/pwm/pwmchip0/pwm1/duty_cycle
+
+        # Level Shifter: gpio16 = 0 = out
+        if [ ! -d /sys/class/gpio/gpio16 ] ; then
+            echo -n "16" > /sys/class/gpio/export
+        fi
+        echo -n "out" > /sys/class/gpio/gpio16/direction
+        echo -n "0" > /sys/class/gpio/gpio16/value
+
+        # Resistor: gpio17 = in = disabled
+        if [ ! -d /sys/class/gpio/gpio17 ] ; then
+            echo -n "17" > /sys/class/gpio/export
+        fi
+        echo -n "in" > /sys/class/gpio/gpio17/direction
+
+        # Pin Mux 1: gpio76 = low = 0
+        if [ ! -d /sys/class/gpio/gpio76 ] ; then
+            echo -n "76" > /sys/class/gpio/export
+        fi
+        echo -n "0" > /sys/class/gpio/gpio76/value
+
+        # Pin Mux 2: gpio64 (high)
+        if [ ! -d /sys/class/gpio/gpio64 ] ; then
+            echo -n "64" > /sys/class/gpio/export
+        fi
+        echo -n "1" > /sys/class/gpio/gpio64/value
+
+        # I2C 0  on IO18 -------------------------------------------------------
+        # Resistor: gpio57 = pull-up
+        if [ ! -d /sys/class/gpio/gpio57 ] ; then
+            echo -n "57" > /sys/class/gpio/export
+        fi
+        echo -n "out" > /sys/class/gpio/gpio57/direction
+        echo -n "1" > /sys/class/gpio/gpio57/value
+
+        # Pin Mux 1: gpio60 = low
+        if [ ! -d /sys/class/gpio/gpio60 ] ; then
+            echo -n "60" > /sys/class/gpio/export
+        fi
+        echo -n "out" > /sys/class/gpio/gpio60/direction
+        echo -n "0" > /sys/class/gpio/gpio60/value
+
+        # I2C 0  on IO19 -------------------------------------------------------
+        # Resistor: gpio59 = pull-up
+        if [ ! -d /sys/class/gpio/gpio59 ] ; then
+            echo -n "59" > /sys/class/gpio/export
+        fi
+        echo -n "out" > /sys/class/gpio/gpio59/direction
+        echo -n "1" > /sys/class/gpio/gpio59/value
+
+        chgrp i2c /dev/i2c-0
+        chmod g+rw /dev/i2c-0
+    	;;
+    stop)
+        # ADC 0
+        echo -n "49" > /sys/class/gpio/unexport
+        # PWM1
+        echo -n "1" > /sys/class/pwm/pwmchip0/unexport
+        echo -n "16" > /sys/class/gpio/unexport
+        echo -n "17" > /sys/class/gpio/unexport
+        echo -n "76" > /sys/class/gpio/unexport
+        echo -n "64" > /sys/class/gpio/unexport
+        # IO 02
+        echo -n "13" > /sys/class/gpio/unexport
+        echo -n "34" > /sys/class/gpio/unexport
+        echo -n "35" > /sys/class/gpio/unexport
+        echo -n "77" > /sys/class/gpio/unexport
+        # I2C
+        echo -n "in" > /sys/class/gpio/gpio59/direction
+        echo -n "59" > /sys/class/gpio/unexport
+        echo -n "in" > /sys/class/gpio/gpio57/direction
+        echo -n "57" > /sys/class/gpio/unexport
+        echo -n "60" > /sys/class/gpio/unexport
+        ;;
+    status)
+    	ls -d /sys/class/gpio/gpio*
+        ;;
+    *)
+    	echo -n "Usage: $0 "
+    	echo "{start|stop|restart|force-reload|status}"
+    	exit 1
+    	;;
+esac
+
+exit 0
