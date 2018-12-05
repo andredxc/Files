@@ -231,3 +231,34 @@ int readButton(int fd){
 
     return atoi(buffer);
 }
+
+// -----------------------------------------------------------------------------
+int readGPIO(int fd){
+
+    char buffer[10];
+
+    lseek(fd, 0, SEEK_SET);
+    if(read(fd, buffer, sizeof(buffer)) < 0){
+        fprintf(stderr, "%s - Error reading from file\n", __FUNCTION__);
+        return -1;
+    }
+
+    return atoi(buffer);
+}
+
+// -----------------------------------------------------------------------------
+int writeGPIO(int fd, int data){
+
+    int bytesWritten;
+    char buffer[30];
+
+    snprintf(buffer, sizeof(buffer), "%d", data);
+
+    lseek(fd, 0, SEEK_SET);
+    if((bytesWritten = write(fd, buffer, strlen(buffer))) < 0){
+        fprintf(stderr, "%s - Error writing to file\n", __FUNCTION__);
+        return -1;
+    }
+
+    return bytesWritten;
+}

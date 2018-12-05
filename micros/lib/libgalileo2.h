@@ -15,6 +15,8 @@ extern "C"
     extern int setLCDBacklight(int fd, int red, int green, int blue);
     extern int writeLCD(int fd, int line, const char* string, int length);
     extern int readButton(int fd);
+    extern int readGPIO(int fd);
+    extern int writeGPIO(int fd, int data);
 
 #ifdef __cplusplus
 };
