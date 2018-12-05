@@ -170,7 +170,7 @@ case "$1" in
         if [ ! -d /sys/class/gpio/gpio13 ] ; then
             echo -n "13" > /sys/class/gpio/export
         fi
-        echo -n "out" > /sys/class/gpio/gpio13/direction
+        echo -n "in" > /sys/class/gpio/gpio13/direction
         chgrp gpio /sys/class/gpio/gpio13/value
         chmod g+rw /sys/class/gpio/gpio13/value
         chgrp gpio /sys/class/gpio/gpio13/edge

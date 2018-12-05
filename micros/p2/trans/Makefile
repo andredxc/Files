@@ -1,8 +1,8 @@
 TARGET=trans
 SRCS=$(TARGET).c
 
-INCLUDE=-I. -I../../lib
-LIBDIR=-L../../lib
+INCLUDE=-I. -I../lib
+LIBDIR=-L../lib
 LIBS=-lgalileo2
 
 CC=$(CROSS_COMPILE)gcc
@@ -11,7 +11,7 @@ LDFLAGS=$(LIBDIR) $(LIBS) -lm
 
 all: $(TARGET)
 
-$(TARGET): $(SRCS:.c=.o) ../../lib/libgalileo2.a
+$(TARGET): $(SRCS:.c=.o) ../lib/libgalileo2.a
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c

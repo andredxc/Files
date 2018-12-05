@@ -3,14 +3,14 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include <galileo2io.h>
+#include "libgalileo2.h"
 
 int main(int argc,char * argv[])
 {
         unsigned char c;
         struct pollfd pfd;
 
-        if((pfd.fd=open("/sys/class/gpio/gpio6/value",O_RDONLY)) < 0)
+        if((pfd.fd=open("/sys/class/gpio/gpio13/value",O_RDONLY)) < 0)
         {
                 perror("Opening gpio6:");
                 return -1;
@@ -23,14 +23,14 @@ int main(int argc,char * argv[])
 
         puts("Waiting for interrupt...");
 
-        pputs("/sys/class/gpio/gpio6/edge","both");
+        pputs("/sys/class/gpio/gpio13/edge","both");
 
         poll(&pfd,1,-1);
         
         lseek(pfd.fd,0,SEEK_SET);
         read(pfd.fd,&c,1);
         
-        pputs("/sys/class/gpio/gpio6/edge","none");
+        pputs("/sys/class/gpio/gpio13/edge","none");
 
         close(pfd.fd);
         return 0;

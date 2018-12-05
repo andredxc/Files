@@ -18,12 +18,13 @@
 #define ACK "/sys/class/gpio/gpio14/value" // IO3
 #define DATA "/sys/class/gpio/gpio6/value" // IO4
 
+
 int main(){
 
     unsigned char c;
     struct pollfd pfdClock;
     int cont, timedOut, clock_period;
-    int fd_ack, fd_data, done, fd_lcd;
+    int fd_ack, fd_data, done, fd_lcd, zeroCounter, i;
     int data[25];
     char buffer[50], buffer2[10];
 
@@ -45,18 +46,19 @@ int main(){
             return -1;
     }
 
-    pputs("/sys/class/gpio/gpio13/edge","both");
-
-    rising = 0;
-    falling = 0;
     cont = 0;
     zeroCounter = 0;
+    done = 0;
+    
+    read(pfdClock.fd, &c, 1);
+    pfdClock.events = POLLPRI;
+    
+    pputs("/sys/class/gpio/gpio13/edge","both");
+    
     while(!done){
 
         // /* Clear old values */
-        read(pfdClock.fd, &c, 1);
-        pfdClock.events = POLLPRI;
-        puts("Waiting for interrupt...");
+        fprintf(stderr, ".");
         poll(&pfdClock, 1, -1);
         lseek(pfdClock.fd,0,SEEK_SET);
         read(pfdClock.fd,&c,1);
@@ -67,7 +69,7 @@ int main(){
         }
         else{
             // Descida, ler dado
-            write(fd_ack, 0);
+            writeGPIO(fd_ack, 0);
             data[cont] = readGPIO(fd_data);
             if(data[cont] == 0){
                 zeroCounter++;
@@ -88,9 +90,9 @@ int main(){
     }
 
     snprintf(buffer, sizeof(buffer), "");
-    for(i = 0; i < sizeof(data), i++){
+    for(i = 0; i < sizeof(data); i++){
         snprintf(buffer2, sizeof(buffer2), "%d", data[i]);
-        strncat(buffer, "%d", buffer2, sizeof(buffer));
+        strncat(buffer, buffer2, sizeof(buffer));
     }
 
     writeLCD(fd_lcd, 1, buffer, strlen(buffer));

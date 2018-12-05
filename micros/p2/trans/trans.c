@@ -18,9 +18,9 @@
 #define DATA "/sys/class/gpio/gpio0/value" // IO5
 #define ACK "/sys/class/gpio/gpio1/value" // IO6
 
-int stringToBinary(char* a) {
+int* stringToBinary(char* a) {
 
-    int ascii[25]={};
+    int* ascii = (int*)malloc(25*sizeof(int));
     int i=0;
     int j;
 
@@ -31,13 +31,13 @@ int stringToBinary(char* a) {
     }
     return ascii;
 }
-
 int main(){
 
     unsigned char c;
     struct pollfd pfdAck;
     int cont, timedOut, clock_period;
-    int fd_clock, fd_data, done, data[25];
+    int fd_clock, fd_data, done;
+    int *data;
     char buffer[20];
 
     data = stringToBinary("A");
@@ -63,13 +63,14 @@ int main(){
     pputs("/sys/class/gpio/gpio1/edge","both");
 
     cont = 0;
-    clock_period = 10; //ms
+    clock_period = 20; //ms
+    done = 0;
     while(!done){
 
         // /* Clear old values */
         read(pfdAck.fd, &c, 1);
         pfdAck.events = POLLPRI;
-        puts("Waiting for interrupt...");
+        fprintf(stderr, ".");
         if(poll(&pfdAck, 1, clock_period) == 0){
             // Retornou por timeout
             writeGPIO(fd_clock, cont%2);
@@ -77,12 +78,16 @@ int main(){
             continue;
         }
 
+		fprintf(stderr, "ACK\n");
+
         if(c == '1'){
             // Enviar dados
+            fprintf(stderr, "Subida\n");
             writeGPIO(fd_data, data[cont]);
         }
         else{
             // Descida, ler dado
+            fprintf(stderr, "Descida\n");
             writeGPIO(fd_data, 0);
         }
 
