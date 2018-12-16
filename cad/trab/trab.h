@@ -23,5 +23,7 @@ void prim();
 int readGraph();
 void addEdge(uint value, uint src, uint dest);
 void printStructs();
+int distance(uint srcIndex, uint destIndex);
+int findLowest(std::vector<int> vec);
 
 #endif
