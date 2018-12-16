@@ -25,5 +25,7 @@ void addEdge(uint value, uint src, uint dest);
 void printStructs();
 int distance(uint srcIndex, uint destIndex);
 int findLowest(std::vector<int> vec);
+void printEdgeVector(std::vector<EDGE> vec);
+void printEdge(EDGE edge);
 
 #endif

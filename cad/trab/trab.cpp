@@ -7,21 +7,22 @@ std::vector<NODE> _nodeVector;
 void prim(){
 
     uint curNode, done, i, count;
-    std::vector<int> distVector;
-    int curDist;
+    std::vector<int> primVector;
+    std::vector<EDGE> selectedEdges;
+    int edgeIndex;
 
     if(readGraph() < 0){
         return;
     }
-    printStructs();
+    // printStructs();
 
     // Initialize distance distVector
-    for(i = 0; i < _nodeVector.size(); i++){
-        distVector.at(i) = -1;
-    }
+    primVector.assign(_nodeVector.size(), -1);
 
     // Random first node
-    curNode = rand()%_nodeVector.size();
+    // curNode = rand()%_nodeVector.size();
+    curNode = 4;
+    fprintf(stderr, "Prim starting with node %d\n", _nodeVector.at(curNode).code);
 
     done = 0;
     count = 0;
@@ -29,18 +30,25 @@ void prim(){
         // A value of -1 indicates infinite distnce
         // A value of -2 indicates that the node has already been visited
 
-        distVector.at(curNode) = -2;
+        primVector.at(curNode) = -2;
         count++;
 
         for(i = 0; i < _nodeVector.size(); i++){
             // Calculate distance to each other node
-            if(i == curNode){
+            if(primVector.at(i) == -2){
                 continue;
             }
-            curDist = distance(curNode, i);
-            if(curDist != -1 && curDist < distVector.at(i)){
-                // Lower distance value
-                distVector.assign(i, curDist);
+            edgeIndex = distance(curNode, i);
+            if(edgeIndex >= 0){
+                // Valid distance found
+                if(primVector.at(i) == -1){
+                    // Previously infinite distance
+                    primVector.at(i) = edgeIndex;
+                }
+                else if(_edgeVector.at(edgeIndex).value < _edgeVector.at(primVector.at(i)).value){
+                    // New distance is lower
+                    primVector.at(i) = edgeIndex;
+                }
             }
         }
 
@@ -50,9 +58,13 @@ void prim(){
         }
         else{
             // Decide next node
-            curNode = findLowest(distVector);
+            curNode = findLowest(primVector);
+            selectedEdges.push_back(_edgeVector.at(primVector.at(curNode)));
         }
     }
+
+    fprintf(stderr, "RESULT:\n");
+    printEdgeVector(selectedEdges);
 }
 
 // -----------------------------------------------------------------------------
@@ -170,6 +182,7 @@ void printStructs(){
 }
 
 // -----------------------------------------------------------------------------
+// Returns the index to the edge corresponding to the distance
 int distance(uint srcIndex, uint destIndex){
 
     uint i;
@@ -177,10 +190,10 @@ int distance(uint srcIndex, uint destIndex){
     for(i =0; i < _edgeVector.size(); i++){
 
         if(_edgeVector.at(i).srcNode == srcIndex && _edgeVector.at(i).destNode == destIndex){
-            return _edgeVector.at(i).value;
+            return i;
         }
         else if(_edgeVector.at(i).srcNode == destIndex && _edgeVector.at(i).destNode == srcIndex){
-            return _edgeVector.at(i).value;
+            return i;
         }
     }
 
@@ -191,17 +204,43 @@ int distance(uint srcIndex, uint destIndex){
 int findLowest(std::vector<int> vec){
 
     uint i, curLowestIndex;
-    int curLowest;
 
-    curLowest = vec.at(0);
-    curLowestIndex = 0;
+    // curLowestIndex receives first positive value in vector
+    i = 0;
+    while(vec.at(i) < 0){
+        i++;
+    }
+    curLowestIndex = i;
+
+    // fprintf(stderr, "\n\nNEW CALL\n");
+
     for(i = 0; i < vec.size(); i++){
         // Skip negative numbers
-        if(vec.at(i) >= 0 && vec.at(i) < curLowest){
-            curLowest = vec.at(i);
+        if(vec.at(i) >= 0 && _edgeVector.at(vec.at(i)).value < _edgeVector.at(vec.at(curLowestIndex)).value){
+            // fprintf(stderr, "OLD\n");
+            // printEdge(_edgeVector.at(vec.at(curLowestIndex)));
+            // fprintf(stderr, "NEW\n");
+            // printEdge(_edgeVector.at(vec.at(i)));
             curLowestIndex = i;
         }
     }
 
     return curLowestIndex;
+}
+
+// -----------------------------------------------------------------------------
+void printEdgeVector(std::vector<EDGE> vec){
+
+    uint i;
+
+    for(i = 0; i < vec.size(); i++){
+        printEdge(vec.at(i));
+    }
+}
+
+// -----------------------------------------------------------------------------
+void printEdge(EDGE edge){
+
+    fprintf(stderr, "%d ------> %d (value: %d)\n", _nodeVector.at(edge.srcNode).code,
+        _nodeVector.at(edge.destNode).code, edge.value);
 }
