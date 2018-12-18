@@ -2,7 +2,7 @@
 
 int main(){
 
-    dijkstra(1, 3);
-
+    fprintf(stderr, "RESULT: %d\n", dijkstra(1, 3));
+    // prim();
     return 1;
 }

@@ -14,13 +14,12 @@ void prim(){
     if(readGraph() < 0){
         return;
     }
-    printStructs();
 
     // Initialize distance distVector
     primVector.assign(_nodeVector.size(), -1);
 
     // Random first node
-    srand ( time(NULL) );
+    srand (time(NULL));
     curNode = rand()%_nodeVector.size();
     // curNode = 0;
     fprintf(stderr, "Prim starting with node %d\n", _nodeVector.at(curNode).code);
@@ -65,29 +64,23 @@ void prim(){
     }
 
     fprintf(stderr, "RESULT:\n");
-    printEdgeVector(selectedEdges);
+    printUEdgeVector(selectedEdges);
 }
 
 // -----------------------------------------------------------------------------
-void dijkstra(int srcNode, int destNode){
+int dijkstra(int srcNode, int destNode){
 
     uint curNode, initialNode, i, count, shortestDist;
-
-    // std::vector<std::vector<int>> dijVector(_nodeVector.size(), std::vector<int>(_nodeVector.size()));
     std::vector<int> curPath;
     int edgeIndex, lowest, shortestPathIndex;
 
     if(readGraph() < 0){
-        return;
+        return -1;
     }
 
     std::vector<int> dijVector[_nodeVector.size()];
-
-    printStructs();
-    fprintf(stderr, "\n\n");
-
     initialNode = findNodeIndex((uint)srcNode);
-    fprintf(stderr, "Initial node: %d (index %d)\n", srcNode, initialNode);
+    // Marks initial node as visited
     dijVector[initialNode].push_back(-2);
 
     // Find distance from source to every other directly connected node
@@ -124,11 +117,20 @@ void dijkstra(int srcNode, int destNode){
         }
     }
 
+    // Prints chosen path
+    fprintf(stderr, "Chosen path:\n");
+    printDijVector(dijVector[shortestPathIndex]);
+    // Retiurns path distance
+    if(shortestPathIndex == findNodeIndex(destNode)){
+        return pathDistance(dijVector[shortestPathIndex]);
+    }
+
+    // Marks second node as visited
     dijVector[shortestPathIndex].at(0) = -2;
 
     if(lowest == -1){
         fprintf(stderr, "%s - Error, bad graph\n", __FUNCTION__);
-        return;
+        return -1;
     }
 
     count = 2;
@@ -149,34 +151,23 @@ void dijkstra(int srcNode, int destNode){
                 // New path found
                 dijVector[i] = curPath;
                 dijVector[i].push_back(edgeIndex);
-                fprintf(stderr, "New path found: \n");
-                printDijVector(dijVector[i]);
-                fprintf(stderr, "\n\n");
             }
             else if(_edgeVector.at(edgeIndex).value + pathDistance(curPath) < pathDistance(dijVector[i])){
                 // Found better path
                 dijVector[i] = curPath;
                 dijVector[i].push_back(edgeIndex);
-                fprintf(stderr, "Better path found: \n");
-                printDijVector(dijVector[i]);
-                fprintf(stderr, "\n\n");
             }
-            fprintf(stderr, "From node %d to node %d\n", _nodeVector.at(curNode).code, _nodeVector.at(i).code);
-            fprintf(stderr, "value: %d + pathDistance: %d < pathDistance: %d\n", _edgeVector.at(edgeIndex).value, pathDistance(curPath), pathDistance(dijVector[i]));
-
         }
 
         // Determine shortest path
         shortestDist = 0;
         shortestPathIndex = -1;
+        fprintf(stderr, "\n\n");
         for(i = 0; i < _nodeVector.size(); i++){
             if(dijVector[i].at(0) < 0){
                 // Skips visited nodes and infinite paths
                 continue;
             }
-            // fprintf(stderr, "Current path: %d\n", i);
-            // printDijVector(dijVector[i]);
-            // fprintf(stderr, "\n");
             if(shortestPathIndex == -1){
                 shortestPathIndex = i;
                 shortestDist = pathDistance(dijVector[i]);
@@ -187,22 +178,26 @@ void dijkstra(int srcNode, int destNode){
             }
         }
 
-        fprintf(stderr, "Chosen path: %d\n", shortestPathIndex);
+        // Prints chosen path
+        fprintf(stderr, "Chosen path:\n");
         printDijVector(dijVector[shortestPathIndex]);
 
-        // Update current path
-        curPath = dijVector[shortestPathIndex];
-        curNode = _edgeVector.at(dijVector[shortestPathIndex].at(dijVector[shortestPathIndex].size()-1\)).destNode;
-        dijVector[shortestPathIndex].at(0) = -2;
+        // Returns path distance
+        if(shortestPathIndex == findNodeIndex(destNode)){
+            return pathDistance(dijVector[shortestPathIndex]);
+        }
 
-        fprintf(stderr, "Updated curPath\n");
-        printDijVector(curPath);
-        fprintf(stderr, "Distance: %d\n", pathDistance(curPath));
-        fprintf(stderr, "\n");
+        // Update current path
+        if(_edgeVector.at(dijVector[shortestPathIndex].at(dijVector[shortestPathIndex].size()-1)).srcNode == curNode){
+            curPath = dijVector[shortestPathIndex];
+        }
+        curNode = _edgeVector.at(dijVector[shortestPathIndex].at(dijVector[shortestPathIndex].size()-1)).destNode;
+        dijVector[shortestPathIndex].at(0) = -2;
 
         // Update node counter
         count++;
     }
+    return -1;
 }
 
 // -----------------------------------------------------------------------------
@@ -425,9 +420,26 @@ void printEdgeVector(std::vector<EDGE> vec){
 }
 
 // -----------------------------------------------------------------------------
+void printUEdgeVector(std::vector<EDGE> vec){
+
+    uint i;
+
+    for(i = 0; i < vec.size(); i++){
+        printUEdge(vec.at(i));
+    }
+}
+
+// -----------------------------------------------------------------------------
 void printEdge(EDGE edge){
 
     fprintf(stderr, "%d ------> %d (value: %d)\n", _nodeVector.at(edge.srcNode).code,
+        _nodeVector.at(edge.destNode).code, edge.value);
+}
+
+// -----------------------------------------------------------------------------
+void printUEdge(EDGE edge){
+
+    fprintf(stderr, "%d <------> %d (value: %d)\n", _nodeVector.at(edge.srcNode).code,
         _nodeVector.at(edge.destNode).code, edge.value);
 }
 
