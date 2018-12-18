@@ -2,7 +2,7 @@
 
 int main(){
 
-    prim();
+    dijkstra(1, 3);
 
     return 1;
 }

@@ -5,8 +5,9 @@
 #include <stdlib.h>
 #include <iostream>
 #include <vector>
+#include <time.h>
 
-#define INPUT_FILE "graph.txt"
+#define INPUT_FILE "graph4D.txt"
 
 typedef struct edge{
     uint value;
@@ -19,13 +20,18 @@ typedef struct node{
 }NODE;
 
 void prim();
+void dijkstra(int srcNode, int destNode);
 
 int readGraph();
 void addEdge(uint value, uint src, uint dest);
 void printStructs();
-int distance(uint srcIndex, uint destIndex);
-int findLowest(std::vector<int> vec);
+int uDistance(uint srcIndex, uint destIndex);
+int dDistance(uint srcIndex, uint destIndex);
+uint pathDistance(std::vector<int> edgeIndexVec);
+int findShortestEdge(std::vector<int> vec);
+int findNodeIndex(uint code);
 void printEdgeVector(std::vector<EDGE> vec);
 void printEdge(EDGE edge);
+void printDijVector(std::vector<int> vec);
 
 #endif
