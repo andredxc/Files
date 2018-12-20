@@ -1,10 +1,10 @@
-TARGET=main
 CFLAGS=-g -Wall
 CC=g++
 
-all: main.cpp trab.cpp
+all: dijkstra.cpp prim.cpp trab.cpp
 	$(CC) -c trab.cpp $(CFLAGS)
-	$(CC) -o $(TARGET) main.cpp trab.o $(CFLAGS)
+	$(CC) -o dijkstra dijkstra.cpp trab.o $(CFLAGS)
+	$(CC) -o prim prim.cpp trab.o $(CFLAGS)
 
 clean:
-	rm -f *~ *.o $(TARGET)
+	rm -f *~ *.o prim dijkstra

@@ -7,7 +7,7 @@
 #include <vector>
 #include <time.h>
 
-#define INPUT_FILE "graph.txt"
+#define INPUT_FILE "graph3D.txt"
 
 typedef struct edge{
     uint value;

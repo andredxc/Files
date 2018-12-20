@@ -91,15 +91,18 @@ int dijkstra(int srcNode, int destNode){
         }
         edgeIndex = dDistance(initialNode, i);
         if(edgeIndex >= 0){
+            // Found edge with corresponding src and dest
             dijVector[i].push_back(edgeIndex);
         }
         else{
+            // Didn't find corresponding edge
             dijVector[i].push_back(-1);
         }
     }
     // Select closest node as next
     lowest = -1;
     curPath.push_back(0);
+    shortestPathIndex = -1;
     for(i = 0; i < _nodeVector.size(); i++){
         if(lowest == -1 && dijVector[i].at(0) > 0){
             // First possible edge
@@ -116,7 +119,11 @@ int dijkstra(int srcNode, int destNode){
             shortestPathIndex = i;
         }
     }
-
+    // Couldn't find path
+    if(shortestPathIndex == -1){
+        fprintf(stderr, "%s - No path\n", __FUNCTION__);
+        return 0;
+    }
     // Prints chosen path
     fprintf(stderr, "Chosen path:\n");
     printDijVector(dijVector[shortestPathIndex]);
