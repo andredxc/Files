@@ -1,6 +1,6 @@
 
 def main():
-    exercise4()
+    exercise5()
     return
 
 # ---------------------------------------------------------- Exercise 1
@@ -80,7 +80,44 @@ def dictionaryStats(dict):
 
     print("Sum: %.2f, Mean: %.2f, Variance: %.2f" %(sum, mean, variance))
 
+# ---------------------------------------------------------- Exercise 5
+def exercise5():
+    str = "The cat climbed up the roof"
+    print("Original string: %s" %(str))
+    print("New string: %s " %(invertSentence(str)))
+    return
 
+def invertSentence(originalStc):
+    """Inverts every word in 'originalStc'"""
+    i = 0
+    newStc = str()
+    while i < len(originalStc)-1:
+        # print("Ind: %d, stc: %s" %(i, newStc))
+        ind = i
+        (i, word) = findNextWord(originalStc, ind, len(originalStc)-1)
+        newStc += invertWord(word) + " "
+
+    return newStc
+
+def findNextWord(stc, i, j):
+    """Find word in a sentence between indexes 'i' and 'j'"""
+    for k in range(i, j+1):
+        if (k == i and stc[k].isalpha()) or (stc[k].isalpha() and stc[k-1] == ' '):
+            # Found new word
+            for m in range(k, len(stc)):
+                # Find the last letter of the word
+                if stc[m] == ' ':
+                    # Found last letter before a space
+                    return (m, stc[k:m])
+                elif m == len(stc)-1:
+                    # Found last letter in the string
+                    return (m, stc[k:m+1])
+    # Error finding any word
+    raise SystemError
+
+def invertWord(word):
+    """Inverts the letters in a single word"""
+    return word[::-1]
 
 
 
