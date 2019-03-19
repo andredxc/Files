@@ -1,0 +1,38 @@
+info:
+    Alguns arquivos úteis para identificar os pinos da Galileo e fazer as conexões apropriadas para os laboratórios e o trabalho.
+
+lab2-10:
+    Arquivos disponibilizados no moodle provavelmente com algumas alterações que não lembro mais.
+
+potServo e rot:
+    Testes com o conversor e PWM. São bem parecidos com alguns itens das provas.
+
+p2:
+    Prova de 2018/2. Os arquivos dentro do zip foram os enviados para avaliação, ficamos com 4,8.
+    Os outros arquivos dentro da pasta foram modificados posteriormente e corrigem alguns dos problemas.
+
+p21 e p22:
+    Provas antigas, não sei de qual semestre, funcionando.
+
+scripts:
+    Foram muito úteis para passar os scripts de inicialização e rodar programas remotamente. Recomendo ssh-keygen para evitar ter que ficar colocando a senha da Galileo.
+
+
+Dicas para o trabalho:
+
+    O circuito consiste basicamente em 4 partes:
+        - Ler os sensores de fim de curso. (É bem fácil, não deixem de fazer)
+        - Gerar o sinal PWM.
+        - Usar uma ponte h para alimentar o motor do braço com base no sinal PWM gerado.
+        - Fazer as conexões apropriadas para que os sinais do braço sejam decodificados pelo encoder (eu usei o LS7366R) e então sejam lidos pela Galileo.
+
+        Esse encoder teve que ser comprado fora do Brasil. O datasheet mostra como ele deve ser montado no circuito com um cristal oscilador, capacitores e tudo mais.
+        Eu acho que o código que implementa a interface entre o encoder e a Galileo é a parte mais complicada do trabalho, inclusive não descobri como se faz e essa parte não funcionou obviamente.
+
+        Eu recomendo que comprem a ponte H pronta no mercado livre, mas tomem cuidado pois é bem fácil de queimar no dia da apresentação.
+
+        A pcb ficou bem feia mas completa. Entretanto, só conseguimos ler os sensores de fim de curso e fazer o braço se mover para um lado e sem controle de velocidade.
+
+        O Sólon, doutorando da eng elétrica, nos deus algumas aulas quando o Walter não estava. Ele é super gente boa e nos ajudou bastante com o trabalho.
+
+        Por algum motivo ficamos com 0 na parte de documentação do SW, vale perguntar pro Walter o que ele quer com isso.

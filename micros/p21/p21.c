@@ -69,8 +69,7 @@ int main(int argc,char * argv[])
         }
         // Enable trigger1
         pgets(data_str, sizeof(data_str), "/sys/bus/iio/devices/trigger1/name");
-        // fprintf(stderr, "Trigger name read: %s\n", data_str);
-        // GAMBIARRA COM O NOME DO TRIGGER
+        // fprintf(stderr, "Trigger name read: %s\n", data_str); // GAMBIARRA COM O NOME DO TRIGGER
         if(pputs("/sys/bus/iio/devices/iio:device0/trigger/current_trigger", "hrtimer_trig1\n") < 0){
             fprintf(stderr, "Error current_trigger\n");
         }
