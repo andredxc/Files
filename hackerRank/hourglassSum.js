@@ -8,14 +8,12 @@ function hourglassSum(array){
     var lenY = array.length;
     var sumArray = [];
     var done;
-
-   console.log("(1,3): " + array[1][3]);
     
     hourglassCount = 0;
     i = 0;
-    j = 0;
     done = false;
     while(i < lenX && !done){
+        j = 0;
         while(j < lenY && !done){
             if(i+2 < lenX){
                 if(j+2 < lenY){
@@ -45,11 +43,27 @@ function hourglassSum(array){
             highestSum = sumArray[i];
         }
     }
-    console.log(sumArray);
-    console.log(`hourglass sums: ${sumArray}`);
+    // console.log(sumArray);
+    // console.log(`hourglass sums: ${sumArray}`);
     console.log(`Highest sum: ${highestSum}`);
     return highestSum;
 }
 
-var array = [[-9, 0, -9, 0, 0, 0], [-9, 9, -9, 0, 0, 0], [-9, 0, -9, 8, 0, 1], [1, 4, 1, 6, -2, 2], [1, 3, 2, 6, 0, 4], [1, 2, 3, 0, 0, 0]];
+/*
+ARRAY
+-9 -9 -9  1 1 1 
+ 0 -9  0  4 3 2
+-9 -9 -9  1 2 3
+ 0  0  8  6 6 0
+ 0  0  0 -2 0 0
+ 0  0  1  2 4 0
+
+RESULTS
+-63, -34, -9, 12, 
+-10,   0, 28, 23, 
+-27, -11, -2, 10, 
+  9,  17, 25, 18
+*/
+
+var array = [[-9, 0, -9, 0, 0, 0], [-9, -9, -9, 0, 0, 0], [-9, 0, -9, 8, 0, 1], [1, 4, 1, 6, -2, 2], [1, 3, 2, 6, 0, 4], [1, 2, 3, 0, 0, 0]];
 hourglassSum(array);
