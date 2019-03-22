@@ -21,7 +21,7 @@ function loop_collisionTest(){
     // Initialize balls
     if(ballArray.length < 2){
         ballArray.push(new Ball(
-            100,
+            0,
             100,
             4,
             0,
@@ -44,7 +44,7 @@ function loop_collisionTest(){
         ballArray[i].draw();
     }
 
-    requestAnimationFrame(loop);
+    requestAnimationFrame(loop_collisionTest);
 }
 
 
@@ -88,4 +88,5 @@ function loop(){
 }
 
 // -------------------------------------------------------- MAIN
-loop();
+// loop();
+loop_collisionTest();

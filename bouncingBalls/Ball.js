@@ -8,8 +8,14 @@ var canvasHeight = canvas.height = window.innerHeight;
 export default class Ball{
 
     constructor(xPos, yPos, xVel, yVel, radius, color){
-        // TODO: Check for valid positions and radius
         // Ball can`t be spawned outside of the canvas
+        if(xPos - radius < 0 || xPos + radius > canvasWidth){
+            throw `ball exceeds width limits with xPos = ${xPos} and radius = ${radius}`;
+        }
+        else if(yPos - radius < 0 || yPos + radius > canvasHeight){
+            throw `ball exceeds heigth limits with yPos = ${yPos} and radius = ${radius}`;
+        }
+
         this.xPos = xPos;
         this.yPos = yPos;
         this.xVel = xVel;
