@@ -5,6 +5,8 @@ var ctx = canvas.getContext("2d");
 var canvasWidth = canvas.width = window.innerWidth;
 var canvasHeight = canvas.height = window.innerHeight;
 
+const DENSITY = 1; // kg/m3
+
 export default class Ball{
 
     constructor(xPos, yPos, xVel, yVel, radius, color){
@@ -22,6 +24,10 @@ export default class Ball{
         this.yVel = yVel;
         this.color = color;
         this.radius = radius;
+
+        this.volume = 4/3*Math.PI*Math.pow(this.radius, 3);
+        this.density = DENSITY;
+        this.mass = this.density*this.volume;
 
         console.log(`Ball created: xPos: ${this.xPos}, yPos: ${this.yPos}, xVel: ${this.xVel}, yVel: ${this.yVel}, color: ${this.color}, radius: ${this.radius}`);
     }

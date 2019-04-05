@@ -21,7 +21,7 @@ function loop_collisionTest(){
     // Initialize balls
     if(ballArray.length < 2){
         ballArray.push(new Ball(
-            0,
+            100,
             100,
             4,
             0,
@@ -47,12 +47,39 @@ function loop_collisionTest(){
     requestAnimationFrame(loop_collisionTest);
 }
 
+function loop_reflectionTest(){
+    /* Creates only one ball which collides with the wall */
+    var i;
+    var numBalls = 1;
+    // Clear canvas
+    ctx.fillStyle = "rgb(0, 0, 0)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Initialize balls
+    if(ballArray.length < 2){
+        ballArray.push(new Ball(
+            100,
+            100,
+            5,
+            5,
+            10,
+            "rgb(255, 255, 255)"
+        ));
+    }
+    // Update and render balls
+    for(i = 0; i < numBalls; i++){
+        ballArray[i].update();
+        ballArray[i].draw();
+    }
+
+    requestAnimationFrame(loop_reflectionTest);
+}
 
 function loop(){
     /* Generate random balls all over the place */
     var i;
     // Ball constants
-    const numBalls = 20;
+    const numBalls = 1;
     const minX = 3;
     const minY = 3;
     const maxX = canvas.width;
@@ -62,25 +89,32 @@ function loop(){
     const minR = 15;
     const maxR = 15;
 
-    // Clear canvas
-    ctx.fillStyle = "rgb(0, 0, 0)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
 
     // Initialize balls
     while(ballArray.length < numBalls){
-        ballArray.push(new Ball(
-            random(minX, maxX),
-            random(minY, maxY),
-            random(-maxVelX, maxVelX),
-            random(-maxVelY, maxVelY),
-            random(minR, maxR),
-            "rgb(" + random(0,255) + "," + random(0, 255) +"," + random(0, 255) + ")"
-        ));
-
+        // Clear canvas
+        ctx.fillStyle = "rgb(0, 0, 0)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        try{
+            ballArray.push(new Ball(
+                random(minX, maxX),
+                random(minY, maxY),
+                random(-maxVelX, maxVelX),
+                random(-maxVelY, maxVelY),
+                random(minR, maxR),
+                "rgb(" + random(0,255) + "," + random(0, 255) +"," + random(0, 255) + ")"
+            ));
+        }
+        catch(e){
+            console.clear();
+            console.log("Spawning balls again");
+            ballArray = [];
+        }
     }
     // Update and render balls
     for(i = 0; i < numBalls; i++){
-        ballArray[i].update(ballArray);
+        ballArray[i].update();
         ballArray[i].draw();
     }
 
@@ -88,5 +122,6 @@ function loop(){
 }
 
 // -------------------------------------------------------- MAIN
-// loop();
-loop_collisionTest();
+loop();
+// loop_reflectionTest();
+// loop_collisionTest();
