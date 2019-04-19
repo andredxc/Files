@@ -1,0 +1,32 @@
+﻿Programação Distribuída e Paralela - Aula Prática sobre Java threads e barreiras
+
+André Dexheimer 243653
+Érico Moura     243664
+
+Exercício 1:
+	
+	O código possui 3 estágios.
+	
+	Cada estágio é utilizado uma vez por thread.
+	
+	São necessárias 3 barreiras, uma para cada estágio.
+	
+Exercício 2:
+
+	Foram adicionadas chamadas "this.barrier.await();" após cada estágio para garantir que todas as threads cheguem no final do estágio antes de ir para o próximo. 
+	O código resultante está dentro da pasta "exercicio2"
+	
+Exercício 3:
+
+	A modificação implementada foi a criação de um vetor que é manipulado por todas as threads simultaneamente. O vetor possui tamanho n, sendo n o número de threads usadas pela aplicação, pois dessa forma foi possível manter a parametrização deste atributo.
+	
+	Cada thread é responsável por um único índice do vetor e, em cada estágio, o valor 1 é somado ao valor atual daquela posição, inicializado em 0.
+	
+	Além disso, foi necessário criar outra barreira, chamada de finalBarrier, cuja função é esperar até que todas as threads terminem todos os estágios para mostrar o vetor resultante na main thread.
+
+	O código resultante está dentro da pasta "exercicio3"
+
+Execução:
+	
+	Não são necessários parâmetros pela linha de comando. Sendo suficientes as intruções descritas no moodle.
+
