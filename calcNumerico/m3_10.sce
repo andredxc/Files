@@ -1,3 +1,5 @@
+// A resposta no moodle tem uma iteracao a menos, ainda nao sei por que
+
 a = 23.4
 b = 27.8
 count = 0

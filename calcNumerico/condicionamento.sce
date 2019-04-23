@@ -1,37 +1,52 @@
+// Numero de condicionamento da funcao (em x = tanto)
+    // Colocar f(x)
+    // Calcular fl(x) derivada
+    // Trocar o valor de x
+
 function y = f(x)
-    y = x^(1/3)
+    y = cos(2*x+1)
 endfunction
 
 function y = fl(x)
-    y = 1/(3*x^(2/3))
+    y = -2*sin(2*x+1)
 endfunction
 
-function y = g(x)
-    y = exp(x^2)
+function y = f2(x)
+    y = exp(x)
 endfunction
 
-function y = gl(x)
-    y = 2*exp(x^2)*x
+function y = f2l(x)
+    y = exp(x)
 endfunction
 
-function y = h(x)
+function y = f3(x)
+    y = sin(x)
+endfunction
+
+function y = f3l(x)
     y = cos(x)
 endfunction
 
-function y = hl(x)
-    y = -sin(x)
+function y = f4(x)
+    y = sin(4*x)
 endfunction
 
-x = 1
-func = h(x)
-derivative = hl(x)
+function y = f4l(x)
+    y = 4*cos(4*x)
+endfunction
 
-k = abs(x*func(x)/derivative(x))
+
+// ---------------------------------------
+x = 10
+
+//k = abs(x*derivative(x)/func(x))
+k = abs(x*f4l(x)/f4(x))
+
+//k = abs(x.*f2(x)./f2l(x))
 disp(k)
-disp(k*10^(-4))
 return
 
-
+// Outra coisa nada a ver -----------------------------------------------
 
 A = [1.000001 2 3; 4 5 6; 7 8 9]
 
@@ -42,7 +57,7 @@ b1 = A*x
 b2 = b1 + [10^(-8); 0; 0]
 
 x1 = resolve(A, b1)
-x2 = resolve(A, b2)-
+x2 = resolve(A, b2)
 
 erro_entrada = norm(b1-b2)/norm(b1)
 erro_saida = norm(x1-x2)/norm(x1)
