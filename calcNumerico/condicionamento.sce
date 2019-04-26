@@ -14,7 +14,6 @@ endfunction
 function y = f2(x)
     y = exp(x)
 endfunction
-
 function y = f2l(x)
     y = exp(x)
 endfunction
@@ -22,7 +21,6 @@ endfunction
 function y = f3(x)
     y = sin(x)
 endfunction
-
 function y = f3l(x)
     y = cos(x)
 endfunction
@@ -30,17 +28,23 @@ endfunction
 function y = f4(x)
     y = sin(4*x)
 endfunction
-
 function y = f4l(x)
     y = 4*cos(4*x)
 endfunction
 
+function y = f5(x)
+    y = sin(x^2)
+endfunction
+function y = f5l(x)
+    y = 2*x*cos(x^2)
+endfunction
+
 
 // ---------------------------------------
-x = 10
+x = 5/4
 
 //k = abs(x*derivative(x)/func(x))
-k = abs(x*f4l(x)/f4(x))
+k = abs(x*f5l(x)/f5(x))
 
 //k = abs(x.*f2(x)./f2l(x))
 disp(k)

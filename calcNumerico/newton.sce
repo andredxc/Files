@@ -56,14 +56,25 @@ function y = il(x)
     y = 7.*x.^6 - 20.*x.^3
 endfunction
 
+// Exercicio da prova
+function y = f2(x)
+    y = exp(2*cos(x)-1) - 1
+endfunction
+function y = f2l(x)
+    y = -2.*sin(x).*exp(2.*cos(x)-1)
+endfunction
+
+func = f2
+der = f2l
+
 x = -10:0.1:10
 clf
-plot(x, i(x), 'r.-'); xgrid
-plot(x, il(x), 'g.-')
+plot(x, func(x), 'r.-'); xgrid
+plot(x, der(x), 'g.-')
 
 
-x = 0.5
+x = -0.1
 for n = 1:100
-    x = x - i(x)/il(x)
+    x = x - func(x)/der (x)
     disp(x)
 end
