@@ -1,0 +1,75 @@
+receive bloqueante
+send nao-bloqueante
+
+uplink[n]	// pais
+downlink[m] // filhos
+
+status = (DATA_RECEIVED, READY_TO_SEND, DONE)
+
+receiveBuffer = []
+sendBuffer = []
+status = RUNNING
+
+
+thread receive{
+		
+	if(m == 0){
+		// Leaf node, nothing to receive
+		return
+	}
+	else if(n == 0){
+		// Root node, waits for data
+		for(k = 0:m){
+			receive(receiveBuffer[k])
+			data += receiveBuffer[k]
+		}
+		status = DONE
+		notify()
+		return
+	}
+	else{
+		// Intermediate node, sends data once everything is received
+		sendBuffer = nodeData
+		for(k = 0:m){
+			receive(receiveBuffer[k])
+			sendBuffer += receiveBuffer[k]
+		}
+		status = READY_TO_SEND
+		notify()
+		return
+	}	
+}
+
+thread send{
+
+	if(m == 0){
+		// Leaf node, sends data to father
+		send(nodeData, uplink[0])
+		status = DONE
+		return
+	}
+	else if(n != 0){
+		// Intermediate node, waits to transmit data accumulated
+		while(status != READY_TO_SEND){
+			wait()
+		}
+		send(sendBufferm uplink[0])
+		status = DONE
+		return
+	}
+}
+
+thread app{
+
+	thread receive
+	thread send
+	
+	while(status != DONE){
+		wait()
+	}
+	
+	if(n == 0){
+		// Root node
+		print(data)
+	}
+}
