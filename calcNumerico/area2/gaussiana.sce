@@ -1,16 +1,9 @@
 function S = gaussiana(a, b, n, nodes)
     
+    f = fm4
     h = (b - a)/n
     x = linspace(a, b, n+1)
-    
-    w1 = 5/9
-    w2 = 8/9
-    w3 = w1
-    
-    t1 = -sqrt(3/5)
-    t2 = 0
-    t3 = -t1
-    
+        
     // 1 node
     t1 = [0]
     w1 = [2]
@@ -42,23 +35,46 @@ function S = gaussiana(a, b, n, nodes)
         
         if nodes == 1 then
             x1 = alpha*t1(1) + bet
-            A = w1(1)*f(x1)
-        else if nodes == 2 then
+            A = (w1(1)*f(x1))*h/2
+        elseif nodes == 2 then
             x1 = alpha*t2(1) + bet
             x2 = alpha*t2(2) + bet
-            A = w2(1)*f(x1) + w2(2)*f(x2)
-        end
-        
-        x1 = alpha*t1 + bet
-        x2 = alpha*t2 + bet
-        x3 = alpha*t3 + bet
-        
-        A = (w1*f(x1) + w2*f(x2) + w3*f(x3))*h/2
+            A = (w2(1)*f(x1) + w2(2)*f(x2))*h/2
+        elseif nodes == 3 then
+            x1 = alpha*t3(1) + bet
+            x2 = alpha*t3(2) + bet
+            x3 = alpha*t3(3) + bet
+            A = (w3(1)*f(x1) + w3(2)*f(x2) + w3(3)*f(x3))*h/2
+        elseif nodes == 4 then
+            x1 = alpha*t4(1) + bet
+            x2 = alpha*t4(2) + bet
+            x3 = alpha*t4(3) + bet
+            x4 = alpha*t4(4) + bet
+            A = (w4(1)*f(x1) + w4(2)*f(x2) + w4(3)*f(x3)...
+                 + w4(4)*f(x4))*h/2
+        elseif nodes == 5 then
+            x1 = alpha*t5(1) + bet
+            x2 = alpha*t5(2) + bet
+            x3 = alpha*t5(3) + bet
+            x4 = alpha*t5(4) + bet
+            x5 = alpha*t5(5) + bet
+            A = (w5(1)*f(x1) + w5(2)*f(x2) + w5(3)*f(x3)...
+                + w5(4)*f(x4) + w5(5)*f(x5))*h/2
+        else
+            error("Invalid number of nodes")
+        end 
         S = S + A
     end
-    
 endfunction
 
-function y = f(x)
+function y = f0(x)
     y = x.^6
+endfunction
+
+function y = fm1(x)
+    y = sin(8*x)
+endfunction
+
+function y = fm4(x)
+    y = sin(7*x + 1)
 endfunction

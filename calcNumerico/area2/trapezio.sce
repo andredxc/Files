@@ -2,7 +2,9 @@ function S = trapezio(a, b, n)
     
     f = f2
     h = (b - a)/n   // n numero de intervalos
-//    h = 0.1
+//    h = 0.5
+//    n = (b - a)/h
+    h = 0.1
     x = linspace(a, b, n+1)
 
     S = 0

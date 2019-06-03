@@ -1,7 +1,10 @@
 function  S = simpson(a, b, n)
     
-    f = f4
-    h = (b - a)/n   // n numero de intervalos
+    f = f2
+    h = (b - a)/n
+//    h = 0.5
+//    n = (b - a)/h
+    
     x = linspace(a, b, n+1)
     
     S = 0

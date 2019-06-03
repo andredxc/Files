@@ -1,8 +1,9 @@
 function S = rieman(a, b, n)
     
     f = f2
-    h = (b - a)/n   // n numero de intervalos
-    //h = 0.0025
+//    h = (b - a)/n   // n numero de intervalos
+    h = 0.0025
+    n = (b - a)/h
     x = linspace(a, b, n+1)
 
     S = 0
