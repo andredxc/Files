@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 * Copyright (c) 2013 Paul J. Drongowski
 */
 
-#define MSIZE     500
+#define MSIZE     1000
 float matrix_a[MSIZE][MSIZE] ;
 float matrix_b[MSIZE][MSIZE] ;
 float matrix_r[MSIZE][MSIZE] ;

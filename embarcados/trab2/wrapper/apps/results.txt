@@ -1,0 +1,62 @@
+------------------------------------------------------------------------------------------------ C
+Tamanho 1 (10k):
+
+andre@pop-os:~/github/files/embarcados/trab2/wrapper/apps$ ../wrapped "./c"
+DoneTempo de execucao em milisegundos: 3377.00000
+Energia consumida em Joules:   61.52495
+
+andre@pop-os:~/github/files/embarcados/trab2/wrapper/apps$ ../wrapped "./c"
+DoneTempo de execucao em milisegundos: 3399.00000
+Energia consumida em Joules:   66.58697
+
+andre@pop-os:~/github/files/embarcados/trab2/wrapper/apps$ ../wrapped "./c"
+DoneTempo de execucao em milisegundos: 3409.00000
+Energia consumida em Joules:   62.60359
+
+
+
+Tamanho 2 (27k):
+
+andre@pop-os:~/github/files/embarcados/trab2/wrapper/apps$ ../wrapped "./c"
+DoneTempo de execucao em milisegundos: 9076.00000
+Energia consumida em Joules:   161.69809
+
+andre@pop-os:~/github/files/embarcados/trab2/wrapper/apps$ ../wrapped "./c"
+DoneTempo de execucao em milisegundos: 8892.00000
+Energia consumida em Joules:   160.22716
+
+andre@pop-os:~/github/files/embarcados/trab2/wrapper/apps$ ../wrapped "./c"
+DoneTempo de execucao em milisegundos: 8834.00000
+Energia consumida em Joules:   157.83919
+
+
+Tamanho 3 (40k):
+
+andre@pop-os:~/github/files/embarcados/trab2/wrapper/apps$ ../wrapped "./c"
+DoneTempo de execucao em milisegundos: 14625.00000
+Energia consumida em Joules:   272.01827
+
+andre@pop-os:~/github/files/embarcados/trab2/wrapper/apps$ ../wrapped "./c"
+DoneTempo de execucao em milisegundos: 14539.00000
+Energia consumida em Joules:   260.15444
+
+andre@pop-os:~/github/files/embarcados/trab2/wrapper/apps$ ../wrapped "./c"
+DoneTempo de execucao em milisegundos: 14538.00000
+Energia consumida em Joules:   280.01300
+
+------------------------------------------------------------------------------------------------ Java
+Tamanho 1 (10k):
+andre@pop-os:~/github/files/embarcados/trab2/wrapper/apps$ ../wrapped "java -Xmx4096m codigo"
+10239
+Tempo de execucao em milisegundos: 4082.00000
+Energia consumida em Joules:   78.08130
+andre@pop-os:~/github/files/embarcados/trab2/wrapper/apps$ ../wrapped "java -Xmx4096m codigo"
+10239
+Tempo de execucao em milisegundos: 4061.00000
+Energia consumida em Joules:   78.34000
+andre@pop-os:~/github/files/embarcados/trab2/wrapper/apps$ ../wrapped "java -Xmx4096m codigo"
+10239
+Tempo de execucao em milisegundos: 4077.00000
+Energia consumida em Joules:   77.03689
+
+Tamanho 2 (27k):
