@@ -1,0 +1,146 @@
+------------------------------ C
+Running C benchmark 1 (1 out of 5)
+DoneTempo de execucao em milisegundos: 1720.00000
+Energia consumida em Joules:   33.76290
+Running C benchmark 1 (2 out of 5)
+DoneTempo de execucao em milisegundos: 1699.00000
+Energia consumida em Joules:   33.75997
+Running C benchmark 1 (3 out of 5)
+DoneTempo de execucao em milisegundos: 1704.00000
+Energia consumida em Joules:   34.74782
+Running C benchmark 1 (4 out of 5)
+DoneTempo de execucao em milisegundos: 1689.00000
+Energia consumida em Joules:   33.74090
+Running C benchmark 1 (5 out of 5)
+DoneTempo de execucao em milisegundos: 1707.00000
+Energia consumida em Joules:   35.68623
+
+Running C benchmark 2 (1 out of 5)
+DoneTempo de execucao em milisegundos: 4973.00000
+Energia consumida em Joules:   102.51490
+Running C benchmark 2 (2 out of 5)
+DoneTempo de execucao em milisegundos: 5023.00000
+Energia consumida em Joules:   101.49338
+Running C benchmark 2 (3 out of 5)
+DoneTempo de execucao em milisegundos: 4984.00000
+Energia consumida em Joules:   99.86472
+Running C benchmark 2 (4 out of 5)
+DoneTempo de execucao em milisegundos: 5007.00000
+Energia consumida em Joules:   99.55700
+Running C benchmark 2 (5 out of 5)
+DoneTempo de execucao em milisegundos: 5093.00000
+Energia consumida em Joules:   97.81181
+
+Running C benchmark 3 (1 out of 5)
+DoneTempo de execucao em milisegundos: 8201.00000
+Energia consumida em Joules:   161.61736
+Running C benchmark 3 (2 out of 5)
+DoneTempo de execucao em milisegundos: 8373.00000
+Energia consumida em Joules:   162.29456
+Running C benchmark 3 (3 out of 5)
+DoneTempo de execucao em milisegundos: 8267.00000
+Energia consumida em Joules:   164.51073
+Running C benchmark 3 (4 out of 5)
+DoneTempo de execucao em milisegundos: 8282.00000
+Energia consumida em Joules:   165.49902
+Running C benchmark 3 (5 out of 5)
+DoneTempo de execucao em milisegundos: 8342.00000
+Energia consumida em Joules:   168.00949
+
+------------------------------ Java
+Running Java benchmark 1 (1 out of 5)
+Tempo de execucao em milisegundos: 3744.00000
+Energia consumida em Joules:   51.28025
+Running Java benchmark 1 (2 out of 5)
+Tempo de execucao em milisegundos: 1769.00000
+Energia consumida em Joules:   35.84118
+Running Java benchmark 1 (3 out of 5)
+Tempo de execucao em milisegundos: 1716.00000
+Energia consumida em Joules:   31.71265
+Running Java benchmark 1 (4 out of 5)
+Tempo de execucao em milisegundos: 1711.00000
+Energia consumida em Joules:   34.93125
+Running Java benchmark 1 (5 out of 5)
+Tempo de execucao em milisegundos: 1779.00000
+Energia consumida em Joules:   36.86069
+
+Running Java benchmark 2 (1 out of 5)
+Tempo de execucao em milisegundos: 4985.00000
+Energia consumida em Joules:   107.62308
+Running Java benchmark 2 (2 out of 5)
+Tempo de execucao em milisegundos: 4889.00000
+Energia consumida em Joules:   104.34563
+Running Java benchmark 2 (3 out of 5)
+Tempo de execucao em milisegundos: 4931.00000
+Energia consumida em Joules:   103.20424
+Running Java benchmark 2 (4 out of 5)
+Tempo de execucao em milisegundos: 4920.00000
+Energia consumida em Joules:   102.84672
+Running Java benchmark 2 (5 out of 5)
+Tempo de execucao em milisegundos: 4850.00000
+Energia consumida em Joules:   90.21387
+
+Running Java benchmark 3 (1 out of 5)
+Tempo de execucao em milisegundos: 7922.00000
+Energia consumida em Joules:   135.59722
+Running Java benchmark 3 (2 out of 5)
+Tempo de execucao em milisegundos: 7816.00000
+Energia consumida em Joules:   133.98411
+Running Java benchmark 3 (3 out of 5)
+Tempo de execucao em milisegundos: 7740.00000
+Energia consumida em Joules:   133.28754
+Running Java benchmark 3 (4 out of 5)
+Tempo de execucao em milisegundos: 7750.00000
+Energia consumida em Joules:   133.31256
+Running Java benchmark 3 (5 out of 5)
+Tempo de execucao em milisegundos: 7747.00000
+Energia consumida em Joules:   133.03098
+
+------------------------------ Python
+Running Python benchmark 1 (1 out of 5)
+Tempo de execucao em milisegundos: 5157.00000
+Energia consumida em Joules:   81.85990
+Running Python benchmark 1 (2 out of 5)
+Tempo de execucao em milisegundos: 5080.00000
+Energia consumida em Joules:   81.11356
+Running Python benchmark 1 (3 out of 5)
+Tempo de execucao em milisegundos: 5059.00000
+Energia consumida em Joules:   80.31666
+Running Python benchmark 1 (4 out of 5)
+Tempo de execucao em milisegundos: 5065.00000
+Energia consumida em Joules:   80.60676
+Running Python benchmark 1 (5 out of 5)
+Tempo de execucao em milisegundos: 5080.00000
+Energia consumida em Joules:   81.02164
+
+Running Python benchmark 2 (1 out of 5)
+Tempo de execucao em milisegundos: 45523.00000
+Energia consumida em Joules:   726.45244
+Running Python benchmark 2 (2 out of 5)
+Tempo de execucao em milisegundos: 46285.00000
+Energia consumida em Joules:   774.87480
+Running Python benchmark 2 (3 out of 5)
+Tempo de execucao em milisegundos: 45642.00000
+Energia consumida em Joules:   741.31049
+Running Python benchmark 2 (4 out of 5)
+Tempo de execucao em milisegundos: 45705.00000
+Energia consumida em Joules:   714.71636
+Running Python benchmark 2 (5 out of 5)
+Tempo de execucao em milisegundos: 45353.00000
+Energia consumida em Joules:   721.30437
+
+Running Python benchmark 3 (1 out of 5)
+Tempo de execucao em milisegundos: 125566.00000
+Energia consumida em Joules:   2023.20589
+Running Python benchmark 3 (2 out of 5)
+Tempo de execucao em milisegundos: 124883.00000
+Energia consumida em Joules:   1954.40343
+Running Python benchmark 3 (3 out of 5)
+Tempo de execucao em milisegundos: 125563.00000
+Energia consumida em Joules:   2014.99188
+Running Python benchmark 3 (4 out of 5)
+Tempo de execucao em milisegundos: 125089.00000
+Energia consumida em Joules:   1994.88403
+Running Python benchmark 3 (5 out of 5)
+Tempo de execucao em milisegundos: 124917.00000
+Energia consumida em Joules:   1954.24398
