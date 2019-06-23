@@ -5,11 +5,11 @@
  * PONTOS MAIS PROXIMOS
  */
 clear
-x=[1 2 3 4]'
+x=[-2 -1 0 1 2]'
 // Quando y for uma funcao, cuidar com o sinal de trasnposta (')
-y=3./x
+y=exp(x)
 // x para interpolar
-X=3+47/100
+X=0.5
 // Caso desejar descobrir apenas um ponto, X=valor que deseja interpolar
 // Chamar "p" no scilab ao final da execucao
 n=length(x)
