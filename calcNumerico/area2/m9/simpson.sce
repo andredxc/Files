@@ -4,30 +4,22 @@
     h -> comprimento do intervalo
     a -> intervalo inferior
     b -> intervalo superior
+    
+        Erro na ordem O(n^4) ou O(h^4) com n sendo multiplicado e h sendo 
+    dividido
 */ 
+clear
 function y = f1(x)
-    y = exp(x)
+    y = sin(cos(2*x))
 endfunction
 
-function y = f2(x)
-    y = sin(x + 19)
-endfunction
-
-function y = f3(x)
-    y = cos(x) + cos(3*x)
-endfunction
-
-function y = f4(x)
-    y = cos(4*x + 5)
-endfunction
-
-a = 0
+a = 2
 b = 3
-//n = 1
-//h = (b - a)/n
-h = 0.5
-n = (b - a)/h
-f = f2
+n = 100
+h = (b - a)/n
+//h = 0.5
+//n = (b - a)/h
+f = f1
 
 x = linspace(a, b, n+1)
 

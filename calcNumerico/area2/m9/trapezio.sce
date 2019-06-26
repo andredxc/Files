@@ -4,27 +4,25 @@
     h -> comprimento do intervalo
     a -> intervalo inferior
     b -> intervalo superior
+    
+    Erro na ordem O(n^2) ou O(h^2) com n sendo multiplicado e h sendo 
+    dividido
+    
+    No vídeo aparece que a cada vez que o numero de intervalos dobra o 
+    erro cai 4 vezes, certo?
 */ 
 clear
 function y = f1(x)
-    y = exp(x)
+    y = x^2 + exp(x)
 endfunction
 
-function y = f2(x)
-    y = cos(x/5)
-endfunction
-
-function y = f3(x)
-    y = x^3 - 3*x
-endfunction
-
-a = 1
-b = 3.5
-//n = 6
+a = 0
+b = 2
+//n = 32
 //h = (b - a)/n   // n numero de intervalos
-h = 0.1
+h = 0.0625
 n = (b - a)/h
-f = f3
+f = f1
 
 x = linspace(a, b, n+1)
 

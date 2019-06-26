@@ -5,26 +5,19 @@
     a -> intervalo inferior
     b -> intervalo superior
 */ 
-function y = f1(x)
-    y = exp(x)
-endfunction
-
-function y = f2(x)
-    y = 1/(5*x)
-endfunction
 
 function y = f3(x)
-    y = cos(2*x)
+    y = x^2 + exp(x)
 endfunction
 
-a = 2
-b = 3
-n = 45
+a = 0
+b = 2
+//n = 100
+//h = (b - a)/n
 
-f = f3
-h = (b - a)/n
-// h = 0.0025
+h = 0.0078125
 n = (b - a)/h
+f = f3
 x = linspace(a, b, n+1)
 
 S = 0
