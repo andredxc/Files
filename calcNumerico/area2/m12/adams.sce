@@ -1,8 +1,10 @@
 // Q1 - Encontre os coeficientes [c_1, c_2, c_3] do método de passo múltiplo u_{n+1}= u_n + h [c_1 f_n + c_2 f_{n-1}+c_3 f_{n-2}]. Forneça como resposta c_1.
 
+// [a,b] = rat(0.66666666666666666666666666)
+
 x(1) = 1; // 0 e' do c1*fn+0
-x(2) = 0; // -1 e' do c2*fn-1
-x(3) = -1; // -2 e' do c3*fn-2
+x(2) = -1; // -1 e' do c2*fn-1
+x(3) = -2; // -2 e' do c3*fn-2
 // x(4) = -3
 
 // para u_n como o primeiro termo do lado direito
@@ -12,9 +14,9 @@ b(3) = 1/3;
 // b(4) = 1/4;
 
 // para u_{n-1} como o primeiro termo do lado direito
-b(1) = 2;
-b(2) = 0;
-b(3) = 2/3;
+//b(1) = 2;
+//b(2) = 0;
+//b(3) = 2/3;
 // b(4) = 
 
 for i=1:3

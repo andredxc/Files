@@ -18,14 +18,14 @@
 
 clear
 function y = f1(t, u)
-    y = u*t
+    y = sin(t + 1)
 endfunction
     
-N = 0
-uInicial = 0.1
-tInicial = 1
-tFinal = 2
-h = 0.1
+N = 100
+uInicial = 13
+tInicial = 13
+tFinal = 17
+h = 0.4
     
 f = f1
 cor = 'ro-'

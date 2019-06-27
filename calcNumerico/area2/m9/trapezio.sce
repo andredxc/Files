@@ -13,15 +13,15 @@
 */ 
 clear
 function y = f1(x)
-    y = x^2 + exp(x)
+    y = cos(7*x)
 endfunction
 
 a = 0
-b = 2
-//n = 32
-//h = (b - a)/n   // n numero de intervalos
-h = 0.0625
-n = (b - a)/h
+b = 1/7
+n = 3
+h = (b - a)/n   // n numero de intervalos
+//h = 0.0625
+//n = (b - a)/h
 f = f1
 
 x = linspace(a, b, n+1)

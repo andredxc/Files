@@ -1,3 +1,16 @@
+clear
+/*
+    Taylor
+    
+    Derivando:
+    u' = u*t (enunciado)
+    u'' = (u*t)'
+    u'' = u'*t + u*t'
+        sendo u' = u*t segundo o enunciado
+    u'' = (u*t)*t + u
+*/
+
+
 function y = f0(t, u)
     y = u*t
 endfunction
@@ -7,7 +20,7 @@ function y = f0t(t, u)
 endfunction
 
 function y = f0tt(t, u)
-    y = ((u*t)*t + u)*t + (u*t) + (u*t)
+    y=(u*t^3)+2*u*t+u*t
 endfunction
     
     
@@ -41,7 +54,7 @@ for n = 1:N
     // Ordem 2
     u(n+1) = u(n) + h*F + (h^2/2)*Ft + (h^3/6)*Ft
     // Se fosse taylor de ordem 3
-    //u(n+1) = u(n+1) + (h^3/6)*Ftt
+    u(n+1) = u(n+1) + (h^3/6)*Ftt
 end
 
 ultimo = u(N+1)

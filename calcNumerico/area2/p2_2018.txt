@@ -1,0 +1,9 @@
+1: m9/simpson
+2: m11/heun
+3: m12/gaussiana
+4: m12/adams
+5: derivada - pulei
+6: m11/heun
+7: m10/pesos
+8: m9/trapezio
+9: m11/euler

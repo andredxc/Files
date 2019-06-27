@@ -14,12 +14,12 @@
 */
 
 function y = f1(x)
-    y = sin(sin(sin(x)))
+    y = 10*cos(x + 2) + 10
 endfunction
     
-a = 0
-b = 10
-n = 64
+a = 2
+b = 3
+n = 2000
 nodes = 3
 f = f1
 h = (b - a)/n

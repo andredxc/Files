@@ -8,7 +8,7 @@ R: [8/36, 25/36, 3/36]
 */
 
 clear
-vetor_nodes = [-0.5, 0, 0.5]
+vetor_nodes = [-0.72, 0.12, 0.82]
 lim_inicial = -1
 lim_final = 1
     

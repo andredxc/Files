@@ -10,12 +10,12 @@
 */ 
 clear
 function y = f1(x)
-    y = sin(cos(2*x))
+    y = cos(x + 1/12)
 endfunction
 
-a = 2
-b = 3
-n = 100
+a = 0
+b = 1
+n = 3
 h = (b - a)/n
 //h = 0.5
 //n = (b - a)/h
