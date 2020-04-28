@@ -1,0 +1,69 @@
+version: '3.3'
+services:
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.0
+    container_name: elastic01
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms3g -Xmx5g"
+      - xpack.security.enabled=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+            #      - data01:/usr/share/elasticsearch/data
+      - /home/acarneiro/elkStack/elastic/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /datadrive/docker/elasticsearch_data:/usr/share/elasticsearch/data
+      - /datadrive/docker/elasticsearch_logs:/usr/share/elasticsearch/logs
+      - /datadrive/docker/elasticsearch_repository:/usr/share/elasticsearch/repository
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+
+  fluentd:
+    build: ./fluentd
+    container_name: fluentd01
+    links:
+       - "elasticsearch"
+    ports:
+      - 24224:24224
+      - "24224:24224/udp"
+    networks:
+      - elastic
+    volumes:
+      - /datadrive/docker/fluentd_buffer:/fluentd_server/buffer
+      - /datadrive/docker/fluentd_logs:/fluentd_server/logs
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.5.2
+    container_name: kibana01
+    ports:
+      - 80:5601
+    environment:
+      - elasticsearch.url=https://127.0.0.1:9200
+      - xpack.security.enabled=true
+      - xpack.securiry.idleTimeout="300m"
+      - ELASTICSEARCH_USERNAME=kibana
+      - ELASTICSEARCH_PASSWORD=BA_tat43210
+      - logging.dest=/usr/share/kibana/logs 
+        #    volumes:
+        #      - /home/acarneiro/elkStack/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+        #      - /datadrive/docker/kibana_logs:/usr/share/kibana/logs
+    networks:
+      - elastic
+
+volumes:
+  data01:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge
+
+  # elasticsearch: http://172.18.0.2:9200/*/_search?pretty=true&q=*:*

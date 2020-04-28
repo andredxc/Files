@@ -1,0 +1,15 @@
+# Docker will route the service from port 443 to 5601
+server.port: 5601
+
+server.host: "0.0.0.0"
+
+elasticsearch.hosts: ["http://127.0.0.1:9200"]
+elasticsearch.username: "kibana"
+elasticsearch.password: "BA_tat43210"
+
+xpack.security.enabled: true
+xpack.security.idleTimeout: "300m"
+
+logging.dest: /usr/share/kibana/logs
+logging.verbose: true
+
